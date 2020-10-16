@@ -5,7 +5,6 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class JSONNodeArray implements JSONNode{
     private final String name;
@@ -29,7 +28,7 @@ public class JSONNodeArray implements JSONNode{
     public JSONNodeArray(String name, int depth){
         this.name = name;
         this.depth = depth;
-        this.children = new ArrayList<JSONNode>();
+        this.children = new ArrayList<>();
     }
 
     public JSONNodeArray(String name, int depth, JSONArray content){
@@ -49,24 +48,17 @@ public class JSONNodeArray implements JSONNode{
             try {
                 childType = child.getClass().getSimpleName();
             }catch(Exception ignored){}
-            switch(childType){
-                case "JSONObject":{
+            switch (childType) {
+                case "JSONObject" -> {
                     JSONObject jChild = (JSONObject) child;
-                    this.addChild(new JSONNodeObject(String.valueOf(content.indexOf(child)),this.getDepth()+1,jChild,this.daddy));
-                    break;
+                    this.addChild(new JSONNodeObject(String.valueOf(content.indexOf(child)), this.getDepth() + 1, jChild, this.daddy));
                 }
-                case "JSONArray":{
+                case "JSONArray" -> {
                     JSONArray jChild = (JSONArray) child;
-                    this.addChild(new JSONNodeArray(String.valueOf(content.indexOf(child)),this.getDepth()+1,jChild,this.daddy));
-                    break;
+                    this.addChild(new JSONNodeArray(String.valueOf(content.indexOf(child)), this.getDepth() + 1, jChild, this.daddy));
                 }
-                case "null":{
-                    this.addChild(new JSONNodeParameter(String.valueOf(content.indexOf(child)),this.getDepth()+1,"null"));
-                    break;
-                }
-                default:{
-                    this.addChild(new JSONNodeParameter(String.valueOf(content.indexOf(child)),this.getDepth()+1,String.valueOf(child)));
-                }
+                case "null" -> this.addChild(new JSONNodeParameter(String.valueOf(content.indexOf(child)), this.getDepth() + 1, "null"));
+                default -> this.addChild(new JSONNodeParameter(String.valueOf(content.indexOf(child)), this.getDepth() + 1, String.valueOf(child)));
             }
         }
     }
@@ -89,7 +81,7 @@ public class JSONNodeArray implements JSONNode{
 
     public String toPrettyString(){
         StringBuilder s = new StringBuilder(JSONTextHelper.currentOffset(this.depth));
-        s.append(this.name+": [\n");
+        s.append(this.name).append(": [\n");
         for(JSONNode child : this.children) {
             s.append(child.toPrettyString());
         }

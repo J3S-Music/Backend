@@ -4,21 +4,19 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class GraphForSpotifySkimmer extends JSONGraph{
     public ArrayList<String> ignoreList;
-    private final String fileName = "C:\\Users\\de5732\\git\\Backend\\src\\main\\resources\\defaultIgnoreList.json";
+    private final String FILE_NAME = "C:\\Users\\de5732\\git\\Backend\\src\\main\\resources\\defaultIgnoreList.json";
 
 
     public GraphForSpotifySkimmer(JSONObject content,String rootName) throws IOException, ParseException {
         super();
-        this.setIgnoreList(this.fileName);
+        this.setIgnoreList(this.FILE_NAME);
         this.head = new JSONNodeObject(rootName, 0, content,this);
     }
 
@@ -27,7 +25,7 @@ public class GraphForSpotifySkimmer extends JSONGraph{
         FileReader reader = new FileReader(fileName);
         Object obj = jsonParser.parse(reader);
         JSONArray content = (JSONArray) obj;
-        this.ignoreList = new ArrayList<String>();
+        this.ignoreList = new ArrayList<>();
         for(Object o : content){
             this.ignoreList.add(o.toString());
         }

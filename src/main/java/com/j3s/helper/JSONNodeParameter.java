@@ -3,7 +3,7 @@ package com.j3s.helper;
 public class JSONNodeParameter implements JSONNode {
     private final String name;
     private final int depth;
-    private String value;
+    private final String value;
 
     public String getValue() {
         return this.value;
