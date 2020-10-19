@@ -1,9 +1,15 @@
 package com.j3s.helper;
 
+import org.json.simple.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class JSONNodeParameter implements JSONNode {
     private final String name;
     private final int depth;
     private final String value;
+    private JSONNode parent;
 
     public String getValue() {
         return this.value;
@@ -14,6 +20,12 @@ public class JSONNodeParameter implements JSONNode {
         this.depth = depth;
         this.value = value;
     }
+
+    public  JSONNodeParameter(String name, int depth, String value, JSONNode parent){
+        this(name,depth,value);
+        this.parent = parent;
+    }
+
 
     @Override
     public String getName() {
@@ -31,5 +43,48 @@ public class JSONNodeParameter implements JSONNode {
 
     public String toPrettyString(){
         return JSONTextHelper.currentOffset(this.depth)+this.name+":\""+this.value+"\"\n";
+    }
+
+    @Override
+    public JSONNode findFirstNode(String key) {
+        if(this.name.equals(key)){
+            System.out.println(this.name+" : "+this.depth);
+            return this;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<JSONNode> findAllNodes(String key) {
+        ArrayList<JSONNode> r = new ArrayList<>();
+        if(this.name.equals(key)){
+            r.add(this);
+        }
+        return r;
+    }
+
+    @Override
+    public String getParentDir() {
+        if (this.parent != null){
+            String ppDir = this.parent.getParentDir();
+            StringBuilder s = new StringBuilder(ppDir);
+            if(!ppDir.equals("")) {
+                s.append(":");
+            }
+            s.append(this.parent.getName());
+            return s.toString();
+        }else{
+            return "";
+        }
+    }
+
+    @Override
+    public JSONNode findNode(String[] path) {
+        if(path.length==1&&path[0].equals(this.getName())){
+            return this;
+        }else{
+            return null;
+        }
     }
 }

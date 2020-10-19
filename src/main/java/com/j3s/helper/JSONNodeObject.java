@@ -11,6 +11,7 @@ public class JSONNodeObject implements JSONNode {
     private final String name;
     private final int depth;
     private List<JSONNode> children;
+    private JSONNode parent;
     private GraphForSpotifySkimmer daddy = null;
 
     public boolean addChild(JSONNode child){
@@ -43,6 +44,14 @@ public class JSONNodeObject implements JSONNode {
         this.createSubStructure(content);
     }
 
+
+    public JSONNodeObject(String name, int depth, JSONObject content, GraphForSpotifySkimmer daddy, JSONNode parent){
+        this(name,depth);
+        this.daddy = daddy;
+        this.parent = parent;
+        this.createSubStructure(content);
+    }
+
     @Override
     public String getName() {
         return this.name;
@@ -69,20 +78,20 @@ public class JSONNodeObject implements JSONNode {
             switch (childType) {
                 case "JSONObject" -> {
                     JSONObject jChild = (JSONObject) child;
-                    this.addChild(new JSONNodeObject(key, this.getDepth() + 1, jChild, this.daddy));
+                    this.addChild(new JSONNodeObject(key, this.getDepth() + 1, jChild, this.daddy, this));
                     break;
                 }
                 case "JSONArray" -> {
                     JSONArray jChild = (JSONArray) child;
-                    this.addChild(new JSONNodeArray(key, this.getDepth() + 1, jChild, this.daddy));
+                    this.addChild(new JSONNodeArray(key, this.getDepth() + 1, jChild, this.daddy, this));
                     break;
                 }
                 case "null" -> {
-                    this.addChild(new JSONNodeParameter(key, this.getDepth() + 1, "null"));
+                    this.addChild(new JSONNodeParameter(key, this.getDepth() + 1, "null",this));
                     break;
                 }
                 default -> {
-                    this.addChild(new JSONNodeParameter(key, this.getDepth() + 1, String.valueOf(child)));
+                    this.addChild(new JSONNodeParameter(key, this.getDepth() + 1, String.valueOf(child),this));
                 }
             }
         }
@@ -105,5 +114,71 @@ public class JSONNodeObject implements JSONNode {
         s.append(JSONTextHelper.currentOffset(this.depth));
         s.append("}\n");
         return s.toString();
+    }
+
+    @Override
+    public JSONNode findFirstNode(String key) {
+        if(this.name.equals(key)){
+            return this;
+        }else{
+            for(JSONNode child : this.children){
+                JSONNode j = child.findFirstNode(key);
+                if(j!=null){
+                    return j;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<JSONNode> findAllNodes(String key) {
+        ArrayList<JSONNode> r = new ArrayList<>();
+        if(this.name.equals(key)){
+            r.add(this);
+        }else{
+            for(JSONNode child : this.children){
+                ArrayList<JSONNode> childR = child.findAllNodes(key);
+                if(!childR.isEmpty()){
+                    for(JSONNode node : childR){
+                        r.add(node);
+                    }
+                }
+            }
+        }
+        return r;
+    }
+
+    @Override
+    public String getParentDir() {
+        if (this.parent != null){
+            String ppDir = this.parent.getParentDir();
+            StringBuilder s = new StringBuilder(ppDir);
+            if(!ppDir.equals("")) {
+                s.append(":");
+            }
+            s.append(this.parent.getName());
+            return s.toString();
+        }else{
+            return "";
+        }
+    }
+
+    @Override
+    public JSONNode findNode(String[] path) {
+        if(path[0].equals(this.getName())){
+            if(path.length==1) {
+                return this;
+            }else if(path.length>1){
+                for (JSONNode child : this.children) {
+                    if (child.getName().equals(path[1])){
+                        String[] newPath = new String[path.length-1];
+                        System.arraycopy(path,1,newPath,0,newPath.length);
+                        return child.findNode(newPath);
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

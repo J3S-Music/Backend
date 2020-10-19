@@ -31,9 +31,27 @@ public class GraphForSpotifySkimmer extends JSONGraph{
         }
     }
 
+    public JSONNode getSongArrayFromGraph(){
+        return this.head.findFirstNode("items");
+    }
 
+    public void testFindAll(String key){
+        ArrayList<JSONNode> r = this.head.findAllNodes(key);
+        for(JSONNode node : r){
+            System.out.println(node.getParentDir());
+        }
+    }
 
     public boolean checkIgnored(String testKey){
         return this.ignoreList.contains(testKey);
+    }
+
+    public JSONNode getNode(String basePath){
+        String[] path = basePath.split(":");
+        if(!path[0].equals(this.head.getName())){
+            return null;
+        }else{
+            return this.head.findNode(path);
+        }
     }
 }
