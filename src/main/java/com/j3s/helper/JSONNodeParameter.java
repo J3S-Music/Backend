@@ -80,11 +80,21 @@ public class JSONNodeParameter implements JSONNode {
     }
 
     @Override
+    public String getPath() {
+        return this.getParentDir()+":"+this.getName();
+    }
+
+    @Override
     public JSONNode findNode(String[] path) {
         if(path.length==1&&path[0].equals(this.getName())){
             return this;
         }else{
             return null;
         }
+    }
+
+    @Override
+    public int getChildCount() {
+        return 0;
     }
 }

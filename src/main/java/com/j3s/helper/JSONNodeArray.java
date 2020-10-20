@@ -147,6 +147,11 @@ public class JSONNodeArray implements JSONNode{
     }
 
     @Override
+    public String getPath() {
+        return this.getParentDir()+":"+this.getName();
+    }
+
+    @Override
     public JSONNode findNode(String[] path) {
         if(path[0].equals(this.getName())){
             if(path.length==1) {
@@ -162,5 +167,10 @@ public class JSONNodeArray implements JSONNode{
             }
         }
         return null;
+    }
+
+    @Override
+    public int getChildCount() {
+        return this.children.size();
     }
 }

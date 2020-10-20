@@ -11,5 +11,7 @@ public interface JSONNode {
     JSONNode findFirstNode(String key);
     ArrayList<JSONNode> findAllNodes(String key);
     String getParentDir();
+    String getPath();
     JSONNode findNode(String[] path);
+    int getChildCount();
 }
