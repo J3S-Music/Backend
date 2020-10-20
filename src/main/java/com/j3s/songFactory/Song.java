@@ -38,4 +38,47 @@ public class Song {
         song.put("downVotes",this.downVotes);
         return song;
     }
+
+    public boolean upVote(boolean input){
+        if(input) {
+            this.upVotes++;
+            return true;
+        }else if(this.upVotes>0){
+            this.upVotes--;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean downVote(boolean input){
+        if(input) {
+            this.downVotes++;
+            return true;
+        }else if(this.downVotes>0){
+            this.downVotes--;
+            return true;
+        }
+        return false;
+    }
+
+    public int getUpVotes(){
+        return this.upVotes;
+    }
+
+    public int getDownVotes(){
+        return this.downVotes;
+    }
+
+    public String getTrack(){
+        return this.track;
+    }
+    public String getArtist(){
+        return this.artist;
+    }
+    public String getAlbum(){
+        return this.album;
+    }
+    public String getTrackUID(){
+        return this.trackUID;
+    }
 }
