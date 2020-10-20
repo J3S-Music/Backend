@@ -27,7 +27,7 @@ public class Song {
         this((String) jSong.get("track"),(String) jSong.get("artist"),(String) jSong.get("album"),(JSONArray) jSong.get("imageInformation"),(String) jSong.get("trackUID"));
     }
 
-    public JSONObject toSong(){
+    public JSONObject toJSong(){
         JSONObject song = new JSONObject();
         song.put("track",this.track);
         song.put("artist",this.artist);
