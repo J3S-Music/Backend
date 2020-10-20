@@ -3,7 +3,6 @@ package com.j3s.helper;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class JSONNodeParameter implements JSONNode {
     private final String name;
@@ -96,5 +95,12 @@ public class JSONNodeParameter implements JSONNode {
     @Override
     public int getChildCount() {
         return 0;
+    }
+
+    @Override
+    public JSONObject getSubStructure() {
+        JSONObject sub = new JSONObject();
+        sub.put(this.getName(),this.getValue());
+        return sub;
     }
 }

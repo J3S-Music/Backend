@@ -1,18 +1,19 @@
 package com.j3s.songFactory;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Song {
     protected String track;
     protected String artist;
     protected String album;
-    protected JSONObject imageInformation;
+    protected JSONArray imageInformation;
     protected String trackUID;
 
     protected int upVotes;
     protected int downVotes;
 
-    protected Song(String track, String artist, String album, JSONObject imageInformation, String trackUID){
+    protected Song(String track, String artist, String album, JSONArray imageInformation, String trackUID){
         this.track = track;
         this.artist = artist;
         this.album = album;
@@ -23,7 +24,7 @@ public class Song {
     }
 
     protected Song(JSONObject jSong){
-        this((String) jSong.get("track"),(String) jSong.get("artist"),(String) jSong.get("album"),(JSONObject) jSong.get("imageInformation"),(String) jSong.get("trackUID"));
+        this((String) jSong.get("track"),(String) jSong.get("artist"),(String) jSong.get("album"),(JSONArray) jSong.get("imageInformation"),(String) jSong.get("trackUID"));
     }
 
     public JSONObject toSong(){

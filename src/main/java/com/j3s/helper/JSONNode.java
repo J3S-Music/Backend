@@ -14,4 +14,5 @@ public interface JSONNode {
     String getPath();
     JSONNode findNode(String[] path);
     int getChildCount();
+    JSONObject getSubStructure();
 }

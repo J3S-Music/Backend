@@ -173,4 +173,16 @@ public class JSONNodeArray implements JSONNode{
     public int getChildCount() {
         return this.children.size();
     }
+
+    @Override
+    public JSONObject getSubStructure() {
+        JSONObject res = new JSONObject();
+        JSONArray sub = new JSONArray();
+        for(JSONNode node : this.children){
+            JSONObject child = node.getSubStructure();
+            sub.add(child.get(node.getName()));
+        }
+        res.put(this.getName(),sub);
+        return res;
+    }
 }

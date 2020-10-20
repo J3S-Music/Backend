@@ -2,8 +2,8 @@ package com.j3s.songFactory;
 
 import com.j3s.helper.GraphForSpotifySkimmer;
 import com.j3s.helper.JSONNode;
-import com.j3s.helper.JSONNodeArray;
 import com.j3s.helper.JSONNodeParameter;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
@@ -72,8 +72,27 @@ public class SongFactory {
                     jSong.put("trackUID", ((JSONNodeParameter) spotifyResponse.getNode(path)).getValue());
                 }
             }
-
-            jSong.put("imageInformation", new JSONObject());
+            ArrayList<JSONNode> imageNodes = items.findAllNodes("images");
+            LinkedHashMap<String, String> imageDataMap = generateHashMap(imageNodes);
+            Set<String> imageKeySet = imageDataMap.keySet();
+            parameterArray = findAllParameters(imageKeySet, String.valueOf(i));
+            for (String parameter : parameterArray) {
+                String path = imageDataMap.get(parameter);
+                String[] pathParts = path.split(":");
+                if (pathParts.length > 7) {
+                    continue;
+                }
+                String reference = "";
+                for (String part : pathParts) {
+                    if (isKeyWord(part)) {
+                        reference = part;
+                        break;
+                    }
+                }
+                if (reference.equals("album")) {
+                    jSong.put("imageInformation",(JSONArray) spotifyResponse.getNode(path).getSubStructure().get(spotifyResponse.getNode(path).getName()));
+                }
+            }
             songs.add(new Song(jSong));
         }
         return songs;

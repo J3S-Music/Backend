@@ -10,7 +10,7 @@ import java.util.Set;
 public class JSONNodeObject implements JSONNode {
     private final String name;
     private final int depth;
-    private List<JSONNode> children;
+    private final List<JSONNode> children;
     private JSONNode parent;
     private GraphForSpotifySkimmer daddy = null;
 
@@ -190,5 +190,17 @@ public class JSONNodeObject implements JSONNode {
     @Override
     public int getChildCount() {
         return this.children.size();
+    }
+
+    @Override
+    public JSONObject getSubStructure() {
+        JSONObject res = new JSONObject();
+        JSONObject sub = new JSONObject();
+        for(JSONNode node : this.children){
+            JSONObject child = node.getSubStructure();
+            sub.put(node.getName(),child.get(node.getName()));
+        }
+        res.put(this.getName(),sub);
+        return res;
     }
 }
