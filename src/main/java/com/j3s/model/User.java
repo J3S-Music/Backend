@@ -7,30 +7,29 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer userID;
 
     @Column(name="name")
     private String name;
 
-    @Column(name="avatar")
-    private String avatar;
+    @Column(name="avatarID")
+    private Integer avatarID;
 
     @Column(name="email")
     private String email;
 
-    @Column(name="enabled")
-    private boolean enabled;
+    @Column(name= "Password")
+    private String password;
 
     public User() {
     }
 
-    public User(String name, String avatar, String email, boolean enabled) {
+    public User(String name, Integer avatarID, String email, String password) {
         this.name = name;
-        this.avatar = avatar;
         this.email = email;
-        this.enabled = enabled;
+        this.password = password;
+        this.avatarID = avatarID;
     }
 
     public Integer getUserID() {
@@ -49,12 +48,12 @@ public class User {
         this.name = name;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public Integer getAvatarID() {
+        return avatarID;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setAvatarID(Integer avatarID) {
+        this.avatarID = avatarID;
     }
 
     public String getEmail() {
@@ -65,12 +64,12 @@ public class User {
         this.email = email;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -78,9 +77,9 @@ public class User {
         return "User{" +
                 "userID=" + userID +
                 ", name='" + name + '\'' +
-                ", avatar='" + avatar + '\'' +
+                ", avatarID=" + avatarID +
                 ", email='" + email + '\'' +
-                ", enabled=" + enabled +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
