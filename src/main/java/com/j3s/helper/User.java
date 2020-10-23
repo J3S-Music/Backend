@@ -4,9 +4,9 @@ import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
 
 public class User {
-    public RequestSpecification prepareRequest()
+    public RequestSpecification prepareRequest(String clientAndSecret)
     {
-        RequestSpecification httpsRequest = SerenityRest.given().header("Authorization","Basic MmUxMDk1MGQzMWU5NGQ2NmFhOTQxZWM1NTY5ODJjOWM6MjFhMzI0MjVlYmNjNDVhMjg1ZTRkOWYzYWMzZjYwYTg="/*TODO Bearer*/).relaxedHTTPSValidation();
+        RequestSpecification httpsRequest = SerenityRest.given().header("Authorization","Basic "+clientAndSecret/*TODO Bearer*/).relaxedHTTPSValidation();
         return httpsRequest;
     }
 }

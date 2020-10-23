@@ -71,6 +71,21 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>4.3.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-rest-assured</artifactId>
+			<version>2.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -79,7 +94,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>14</source>
+                    <target>14</target>
+                </configuration>
+            </plugin>
+        </plugins>
 	</build>
 
 </project>

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DummyMain {
     public static void main(String[] args) throws IOException, ParseException {
-//        BuildotronSpotifyAPI b = new BuildotronSpotifyAPI();
+/*//        BuildotronSpotifyAPI b = new BuildotronSpotifyAPI();
 
         JSONParser jsonParser = new JSONParser();
         FileReader reader = new FileReader("./src/main/resources/demoResponse.json");
@@ -24,7 +24,11 @@ public class DummyMain {
         for(Song song : songs) {
             System.out.println(song.toJSong().toString());
         }
-//        System.out.println(j.getNode("spotifyResponse:tracks:items").getSubStructure());
-//        System.out.println(j.toPrettyString());
+        System.out.println(j.getNode("spotifyResponse:tracks:items").getSubStructure());
+//        System.out.println(j.toPrettyString());*/
+        SpotifyLinkMock spotifyLinkMock = new SpotifyLinkMock("MmUxMDk1MGQzMWU5NGQ2NmFhOTQxZWM1NTY5ODJjOWM6MjFhMzI0MjVlYmNjNDVhMjg1ZTRkOWYzYWMzZjYwYTg=");
+        System.out.println(spotifyLinkMock.getCurrentBearer());
+        spotifyLinkMock.kill();
+        System.out.println(spotifyLinkMock.getCurrentBearer());
     }
 }
