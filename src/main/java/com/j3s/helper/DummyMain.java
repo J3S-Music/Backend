@@ -15,7 +15,7 @@ public class DummyMain {
 //        BuildotronSpotifyAPI b = new BuildotronSpotifyAPI();
 
         JSONParser jsonParser = new JSONParser();
-        FileReader reader = new FileReader("C:\\Users\\de5732\\git\\Backend\\src\\main\\resources\\demoResponse.json");
+        FileReader reader = new FileReader("./src/main/resources/demoResponse.json");
         Object obj = jsonParser.parse(reader);
         JSONObject content = (JSONObject) obj;
         GraphForSpotifySkimmer j = new GraphForSpotifySkimmer(content, "spotifyResponse");

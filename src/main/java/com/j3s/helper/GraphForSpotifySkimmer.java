@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class GraphForSpotifySkimmer extends JSONGraph{
     public ArrayList<String> ignoreList;
-    private final String FILE_NAME = "C:\\Users\\de5732\\git\\Backend\\src\\main\\resources\\defaultIgnoreList.json";
+    private final String FILE_NAME = "./src/main/resources/defaultIgnoreList.json";
 
 
     public GraphForSpotifySkimmer(JSONObject content,String rootName) throws IOException, ParseException {
