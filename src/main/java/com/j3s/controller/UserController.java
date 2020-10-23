@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.Optional;
 
 
 @CrossOrigin(origins ="*", allowedHeaders = "*")
@@ -41,7 +39,7 @@ public class UserController {
             method = RequestMethod.DELETE,
             path = "/users/{id}"
     )
-    public void deleteUser(@PathVariable Integer id){
+    public void deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
     }
 
@@ -50,7 +48,7 @@ public class UserController {
             method = RequestMethod.GET,
             path = "/users/{id}"
     )
-    public User getUserByID(@PathVariable Integer id){
+    public User getUserByID(@PathVariable Long id){
         return userService.getUserByID(id);
     }
 
@@ -60,7 +58,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public User updateUser(@RequestBody User user, @PathVariable Integer id){
+    public User updateUser(@RequestBody User user, @PathVariable Long id){
         return userService.updateUser(id, user);
     }
 

@@ -3,7 +3,6 @@ package com.j3s.service;
 import com.j3s.model.User;
 import com.j3s.exception.*;
 import com.j3s.repository.UserRepo;
-import com.j3s.repository.UserRepoCRUD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -12,14 +11,12 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    private UserRepoCRUD userRepoCRUD;
-    @Autowired
     private UserRepo userRepo;
 
     public List<User> getAllUser(){
         List<User> userList = new ArrayList<User>();
 
-        Iterable<User> allUser= userRepoCRUD.findAll();
+        Iterable<User> allUser= userRepo.findAll();
         allUser.forEach(userList::add);
 
         return userList;
@@ -27,21 +24,21 @@ public class UserService {
 
     public User addUser(User user){
         if(getUserByEmail(user.getEmail())==null) {
-            return userRepoCRUD.save(user);
+            return userRepo.save(user);
         }
         else{throw new DuplicateDataException("User already exists: "+user.getEmail());}
     }
 
-    public void deleteUser(Integer userID){
-        if (userRepoCRUD.findById(userID).isPresent()){
-            userRepoCRUD.deleteById(userID);
+    public void deleteUser(Long userID){
+        if (userRepo.findById(userID).isPresent()){
+            userRepo.deleteById(userID);
         }
         else{throw new ResourceNotFoundException("User not found: "+userID);}
     }
 
-    public User getUserByID(Integer userID){
-        if (userRepoCRUD.findById(userID).isPresent()){
-            return userRepoCRUD.findById(userID).get();
+    public User getUserByID(Long userID){
+        if (userRepo.findById(userID).isPresent()){
+            return userRepo.findById(userID).get();
         }
         else{throw new ResourceNotFoundException("User not found: "+userID);}
     }
@@ -54,10 +51,10 @@ public class UserService {
     }
 
 
-    public User updateUser(Integer userID, User user){
-        if(userRepoCRUD.findById(userID).isPresent()){
-            User oldUser = userRepoCRUD.findById(userID).get();
-            if(user.getAvatarID()==null){user.setAvatarID(oldUser.getAvatarID());}
+    public User updateUser(Long userID, User user){
+        if(userRepo.findById(userID).isPresent()){
+            User oldUser = userRepo.findById(userID).get();
+            if(user.getAvatar()==null){user.setAvatar(oldUser.getAvatar());}
             if(user.getEmail()==null){user.setEmail(oldUser.getEmail());}
             else if(getUserByEmail(user.getEmail())!=null){
                 throw new DuplicateDataException("User already exists: "+user.getEmail());
@@ -67,7 +64,7 @@ public class UserService {
         }
         else{throw new ResourceNotFoundException("User not found: "+userID);}
         user.setUserID(userID);
-        return userRepoCRUD.save(user);
+        return userRepo.save(user);
     }
 
     public User login(String email, String password){

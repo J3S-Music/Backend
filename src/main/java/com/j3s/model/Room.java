@@ -1,71 +1,59 @@
 package com.j3s.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import javax.persistence.*;
+import java.util.List;
 
-import java.awt.image.BufferedImage;
-import java.util.UUID;
 
+@Entity
+@Table(name = "room")
 public class Room {
-    private final UUID id;
-    private BufferedImage qr;
-    private String link;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="roomID")
+    private Long roomID;
 
-    public String getLink() {
-        return link;
+    @Column(name="principle")
+    private String principle;
+
+    @OneToMany(mappedBy = "room")
+    private List<UserRoom> userRooms;
+
+    public Room() {
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public Long getRoomID() {
+        return roomID;
     }
 
-    public BufferedImage getQr() {
-        return qr;
+    public void setRoomID(Long roomID) {
+        this.roomID = roomID;
     }
 
-    public void setQr(BufferedImage qr) {
-        this.qr = qr;
+    public String getPrinciple() {
+        return principle;
     }
 
-    public UUID getId() {
-        return id;
+    public void setPrinciple(String principle) {
+        this.principle = principle;
     }
 
-    public Room(){
-        id = UUID.randomUUID();
-        qr = null;
-        link=generateRoomLink();
+    public List<UserRoom> getUserRooms() {
+        return userRooms;
     }
 
-    private String generateRoomLink(){
-        String URL = null;
-        URL="http://localhost:8080/rooms/"+getId();
-        return URL;
+    public void setUserRooms(List<UserRoom> userRooms) {
+        this.userRooms = userRooms;
     }
 
-    public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception {
-        QRCodeWriter barcodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix =
-                barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
-
-        return MatrixToImageWriter.toBufferedImage(bitMatrix);
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomID=" + roomID +
+                ", principle='" + principle + '\'' +
+                ", userRooms=" + userRooms +
+                '}';
     }
-
-    @Autowired
-    private Environment environment;
-
-    public String getServerAddress() {
-        return environment.getProperty("server.address");
-    }
-
-    public String getServerPort() {
-        return environment.getProperty("server.port");
-    }
-
 
 }
 
