@@ -75,6 +75,7 @@ public class JSONNodeObject implements JSONNode {
             try {
                 childType = child.getClass().getSimpleName();
             }catch(Exception ignored){}
+            System.out.println(childType);
             switch (childType) {
                 case "JSONObject" -> {
                     JSONObject jChild = (JSONObject) child;

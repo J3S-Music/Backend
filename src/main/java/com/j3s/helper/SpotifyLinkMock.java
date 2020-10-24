@@ -1,16 +1,15 @@
 package com.j3s.helper;
 
-import io.restassured.specification.RequestSpecification;
+
 import org.apache.commons.net.ntp.TimeStamp;
 
-import java.sql.Timestamp;
 
 public class SpotifyLinkMock {
     private String currentBearer;
     private TimeStamp bearerDead;
     private String clientAndSecret;
 
-    private User currentUser;
+    private final User currentUser;
 
     public SpotifyLinkMock(String clientAndSecret){
         this.currentUser = new User();
@@ -25,6 +24,7 @@ public class SpotifyLinkMock {
 
     public void kill(){
         this.currentBearer = null;
+        this.clientAndSecret = null;
     }
 
     private void getReady(){
@@ -34,7 +34,7 @@ public class SpotifyLinkMock {
     }
 
     private void setBearerDead(long now){
-        this.bearerDead = new TimeStamp(now+3500000l);
+        this.bearerDead = new TimeStamp(now+3559999l);
     }
 
     public String getCurrentBearer(){
