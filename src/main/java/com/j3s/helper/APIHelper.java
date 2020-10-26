@@ -17,6 +17,17 @@ public class APIHelper {
 
     }
 
+    public static RequestSpecification getNewSongQ(User actor, String baseUri, String bearerToken)
+    {
+        RequestSpecification test = actor.basicBearer(bearerToken);
+        test.baseUri(baseUri);
+        test.contentType(ContentType.URLENC);
+        test.formParam("grant_type","client_credentials");
+
+        return test;
+
+    }
+
     public static String getBearerToken(User user, String clientAndSecret){
         RequestSpecification bear = getNewRequestSpecification(new User(),"https://accounts.spotify.com", clientAndSecret);
         Response res = bear.post("/api/token");

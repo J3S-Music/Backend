@@ -27,10 +27,6 @@ public class BuildotronSpotifyAPI {
         }else{
             return null; //TODO errorhandling
         }
-        if(userQ.containsKey("timeSpanRelease")){
-            JSONObject timeSpanReleaseJSON = (JSONObject) userQ.get("timeSpanRelease");
-            q.append(timeSpanFromObject(timeSpanReleaseJSON));
-        }
         q.append("&type=");
         JSONArray typeArray = (JSONArray) userQ.get("type");
         for(Object o : typeArray){
@@ -39,16 +35,6 @@ public class BuildotronSpotifyAPI {
         }
         q.deleteCharAt(q.length()-1);
         return q.toString();
-    }
-    //TODO fix, doesn't work LoL
-    public String timeSpanFromObject(JSONObject timeSpanJSON){
-        StringBuilder time = new StringBuilder("+year:");
-        time.append(timeSpanJSON.get("startYear"));
-        if(timeSpanJSON.containsKey("endYear")){
-            time.append("-");
-            time.append(timeSpanJSON.get("endYear"));
-        }
-        return time.toString();
     }
 
     public String qFromObject(JSONObject qJSON){
