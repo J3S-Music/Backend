@@ -31,7 +31,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public User saveUser(@RequestBody User user){
+    public Long saveUser(@RequestBody User user){
         return userService.addUser(user);
     }
 

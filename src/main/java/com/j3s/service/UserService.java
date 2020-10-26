@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService {
@@ -22,9 +23,10 @@ public class UserService {
         return userList;
     }
 
-    public User addUser(User user){
+    public Long addUser(User user) {
         if(getUserByEmail(user.getEmail())==null) {
-            return userRepo.save(user);
+            User u = userRepo.save(user);
+            return u.getUserID();
         }
         else{throw new DuplicateDataException("User already exists: "+user.getEmail());}
     }
