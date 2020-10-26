@@ -69,11 +69,11 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public User login(String email, String password){
+    public Long login(String email, String password){
         User user = getUserByEmail(email);
         if(user==null){throw new ResourceNotFoundException("User not found: "+email);}
         if(password.equals(user.getPassword())){
-            return user;
+            return user.getUserID();
         }else{
             throw new AuthenticationFailedException("Wrong Password");
         }

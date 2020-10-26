@@ -68,7 +68,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public User authenticate(@RequestBody User user){
+    public Long authenticate(@RequestBody User user){
         String email = user.getEmail();
         String password = user.getPassword();
         return userService.login(email,password);
