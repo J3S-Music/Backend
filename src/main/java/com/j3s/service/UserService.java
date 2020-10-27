@@ -63,6 +63,10 @@ public class UserService {
             }
             if(user.getName()==null){user.setName(oldUser.getName());}
             if(user.getPassword()==null){user.setPassword(oldUser.getPassword());}
+            if(user.getUserConnections()==null){user.setUserConnections(oldUser.getUserConnections());}
+            if(user.getUserRooms()==null){user.setUserRooms(oldUser.getUserRooms());}
+
+
         }
         else{throw new ResourceNotFoundException("User not found: "+userID);}
         user.setUserID(userID);
