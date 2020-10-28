@@ -29,6 +29,10 @@ public class UserConnectionKey implements Serializable {
 
     public UserConnectionKey() {
     }
+    public UserConnectionKey(Long userID, Long connectionID) {
+        this.userID= userID;
+        this.connectionID = connectionID;
+    }
 
     @Override
     public boolean equals(Object o) {

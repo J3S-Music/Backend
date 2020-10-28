@@ -1,6 +1,9 @@
 package com.j3s.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "role")
@@ -12,6 +15,7 @@ public class Role {
 
     @Column(name="name")
     private String name;
+
 
     public Role() {
     }

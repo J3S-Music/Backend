@@ -12,13 +12,13 @@ public class UserConnection {
     UserConnectionKey id;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @MapsId("userID")
     @JoinColumn(name = "userID")
     private User user;
 
-    //@JsonIgnore
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @MapsId("connectionID")
     @JoinColumn(name = "connectionID")
     private Connection connection;

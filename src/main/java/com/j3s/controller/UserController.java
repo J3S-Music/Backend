@@ -1,6 +1,8 @@
 package com.j3s.controller;
 
+import com.j3s.model.Connection;
 import com.j3s.model.User;
+import com.j3s.model.UserConnection;
 import com.j3s.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -46,7 +48,8 @@ public class UserController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            path = "/users/{id}"
+            path = "/users/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public User getUserByID(@PathVariable Long id){
         return userService.getUserByID(id);
@@ -63,6 +66,20 @@ public class UserController {
     }
 
     @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/users/{id}/connections",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public List<UserConnection> getUserConnections(@PathVariable Long id){
+        return userService.getUserConnectionByUserID(id);
+    }
+
+
+
+
+
+
+    @RequestMapping(
             method = RequestMethod.POST,
             path = "/login",
             produces = MediaType.APPLICATION_JSON_VALUE,
@@ -73,5 +90,10 @@ public class UserController {
         String password = user.getPassword();
         return userService.login(email,password);
     }
+
+
+
+
+
 
 }

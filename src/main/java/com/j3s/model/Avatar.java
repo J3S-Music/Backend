@@ -15,8 +15,6 @@ public class Avatar {
     @Column(name="pictureName")
     private String pictureName;
 
-    @OneToMany(mappedBy = "avatar")
-    private List<User> user = new ArrayList<>();
 
     public Avatar() {
     }

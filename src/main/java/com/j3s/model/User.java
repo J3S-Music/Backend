@@ -1,6 +1,5 @@
 package com.j3s.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -30,8 +29,14 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserConnection> userConnections;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserRoom> userRooms;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="roomID", nullable=false)
+    private Room room;
+
+    @ManyToOne
+    @JoinColumn(name="roleID", nullable=false)
+    private Role role;
 
     public User() {
     }
@@ -84,12 +89,20 @@ public class User {
         this.userConnections = userConnections;
     }
 
-    public List<UserRoom> getUserRooms() {
-        return userRooms;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setUserRooms(List<UserRoom> userRooms) {
-        this.userRooms = userRooms;
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
@@ -101,7 +114,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userConnections=" + userConnections +
-                ", userRooms=" + userRooms +
+                ", room=" + room +
+                ", role=" + role +
                 '}';
     }
 }

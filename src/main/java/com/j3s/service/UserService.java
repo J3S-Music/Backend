@@ -1,7 +1,9 @@
 package com.j3s.service;
 
+import com.j3s.model.Connection;
 import com.j3s.model.User;
 import com.j3s.exception.*;
+import com.j3s.model.UserConnection;
 import com.j3s.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,17 @@ public class UserService {
         else{throw new ResourceNotFoundException("User not found: "+userID);}
     }
 
+    public List<UserConnection> getUserConnectionByUserID(Long userID){
+        if (userRepo.findById(userID).isPresent()){
+            User u = userRepo.findById(userID).get();
+            return u.getUserConnections();
+        }
+        else{throw new ResourceNotFoundException("User not found: "+userID);}
+    }
+
+
+
+
     public User getUserByEmail(String email){
         if(userRepo.findByEmail(email)==null){
             return null;
@@ -58,13 +71,14 @@ public class UserService {
             User oldUser = userRepo.findById(userID).get();
             if(user.getAvatar()==null){user.setAvatar(oldUser.getAvatar());}
             if(user.getEmail()==null){user.setEmail(oldUser.getEmail());}
-            else if(getUserByEmail(user.getEmail())!=null){
+            else if(getUserByEmail(user.getEmail())!=null && !user.getEmail().equals(oldUser.getEmail())){
                 throw new DuplicateDataException("User already exists: "+user.getEmail());
             }
             if(user.getName()==null){user.setName(oldUser.getName());}
             if(user.getPassword()==null){user.setPassword(oldUser.getPassword());}
             if(user.getUserConnections()==null){user.setUserConnections(oldUser.getUserConnections());}
-            if(user.getUserRooms()==null){user.setUserRooms(oldUser.getUserRooms());}
+            if(user.getRoom()==null){user.setRoom(oldUser.getRoom());}
+            if(user.getRole()==null){user.setRole(oldUser.getRole());}
 
 
         }

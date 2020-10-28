@@ -17,9 +17,33 @@ public class Room {
     private String principle;
 
     @OneToMany(mappedBy = "room")
-    private List<UserRoom> userRooms;
+    private List<User> users;
+
+    @Column(name="roomCode")
+    private String roomName;
+
+    @Column(name="roomName")
+    private String roomCode;
+
+
 
     public Room() {
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getRoomCode() {
+        return roomCode;
+    }
+
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
     }
 
     public Long getRoomID() {
@@ -38,23 +62,26 @@ public class Room {
         this.principle = principle;
     }
 
-    public List<UserRoom> getUserRooms() {
-        return userRooms;
+    @OneToMany(mappedBy = "room")
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUserRooms(List<UserRoom> userRooms) {
-        this.userRooms = userRooms;
+    public void setUsers(List<User> userRooms) {
+        this.users = userRooms;
     }
+
 
     @Override
     public String toString() {
         return "Room{" +
                 "roomID=" + roomID +
                 ", principle='" + principle + '\'' +
-                ", userRooms=" + userRooms +
+                ", users=" + users +
+                ", roomName='" + roomName + '\'' +
+                ", roomCode='" + roomCode + '\'' +
                 '}';
     }
-
 }
 
 
