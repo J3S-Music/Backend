@@ -27,7 +27,7 @@ public class  RoomController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            path = "/rooms/{roomID}",
+            path = "/room/{roomID}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public Room getRoom(@PathVariable Long roomID){
@@ -37,7 +37,7 @@ public class  RoomController {
 
     @RequestMapping(
             method = RequestMethod.POST,
-            path = "/rooms/create",
+            path = "/room/create",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
@@ -48,7 +48,7 @@ public class  RoomController {
     }
     @RequestMapping(
             method = RequestMethod.POST,
-            path = "/rooms/join",
+            path = "/room/join",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
