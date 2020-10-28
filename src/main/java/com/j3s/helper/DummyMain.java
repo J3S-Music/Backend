@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
+//TODO Kill this soon!!
 public class DummyMain {
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
 //        BuildotronSpotifyAPI b = new BuildotronSpotifyAPI();
