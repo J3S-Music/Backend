@@ -65,14 +65,6 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            path = "/users/{id}/connections",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public List<UserConnection> getUserConnections(@PathVariable Long id){
-        return userService.getUserConnectionByUserID(id);
-    }
 
 
 

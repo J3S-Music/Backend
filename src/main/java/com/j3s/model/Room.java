@@ -72,16 +72,6 @@ public class Room {
     }
 
 
-    @Override
-    public String toString() {
-        return "Room{" +
-                "roomID=" + roomID +
-                ", principle='" + principle + '\'' +
-                ", users=" + users +
-                ", roomName='" + roomName + '\'' +
-                ", roomCode='" + roomCode + '\'' +
-                '}';
-    }
 }
 
 

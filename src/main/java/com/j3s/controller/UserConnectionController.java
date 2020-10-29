@@ -22,39 +22,54 @@ public class UserConnectionController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            path = "/userconnections",
+            path = "/connections",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<UserConnection> getAllConnections(){
         return userConnectionService.getAllUserConnections();
     }
 
-    /*@RequestMapping(
+    @RequestMapping(
             method = RequestMethod.GET,
             path = "/users/{id}/connections",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<UserConnection> getConnections(@PathVariable Long id){
-        return userConnectionService.getUserConnection(id);
-    }*/
+        return userConnectionService.getUserConnections(id);
+    }
 
     @RequestMapping(
             method = RequestMethod.GET,
             path = "/users/{UserID}/connections/{ConnectionID}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public UserConnection getUserConnections(@PathVariable Long UserID, @PathVariable Long ConnectionID){
+    public UserConnection getConnection(@PathVariable Long UserID, @PathVariable Long ConnectionID){
         return userConnectionService.getConnection(UserID, ConnectionID);
     }
+
+
 
     @RequestMapping(
             method = RequestMethod.PUT,
             path = "/users/{UserID}/connections/{ConnectionID}",
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void editUserConnections(@RequestBody UserConnection userConnection, @PathVariable Long UserID, @PathVariable Long ConnectionID){
+         userConnectionService.editConnectionByUserUserIDAndConnectionID(UserID, ConnectionID, userConnection);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "/users/{UserID}/connections/{ConnectionID}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public UserConnection editUserConnections(@RequestBody UserConnection userConnection, @PathVariable Long UserID, @PathVariable Long ConnectionID){
-        return userConnectionService.editConnection(UserID, ConnectionID, userConnection);
+    public void addUserConnection(@RequestBody UserConnection userConnection, @PathVariable Long UserID, @PathVariable Long ConnectionID){
+        userConnectionService.addUserConnection(userConnection, UserID, ConnectionID);
     }
+
+
+
+
 
 }

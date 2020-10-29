@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "connection")
 public class Connection {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="connectionID")
@@ -16,11 +17,6 @@ public class Connection {
     @Column(name="name")
     private String name;
 
-    /*
-    @JsonIgnore
-    @OneToMany(mappedBy = "connection")
-    private List<UserConnection> userConnections;
-    */
     public Connection() {
     }
 
@@ -39,25 +35,7 @@ public class Connection {
     public void setName(String name) {
         this.name = name;
     }
-    /*
-    public List<UserConnection> getUserConnections() {
-        return userConnections;
-    }
 
-    public void setUserConnections(List<UserConnection> userConnections) {
-        this.userConnections = userConnections;
-    }
-
-    @Override
-    public String toString() {
-        return "Connection{" +
-                "connectionID=" + connectionID +
-                ", name='" + name + '\'' +
-                ", userConnections=" + userConnections +
-                '}';
-    }
-
-     */
 }
 
 

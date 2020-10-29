@@ -47,14 +47,6 @@ public class UserService {
         else{throw new ResourceNotFoundException("User not found: "+userID);}
     }
 
-    public List<UserConnection> getUserConnectionByUserID(Long userID){
-        if (userRepo.findById(userID).isPresent()){
-            User u = userRepo.findById(userID).get();
-            return u.getUserConnections();
-        }
-        else{throw new ResourceNotFoundException("User not found: "+userID);}
-    }
-
 
 
 
@@ -76,7 +68,6 @@ public class UserService {
             }
             if(user.getName()==null){user.setName(oldUser.getName());}
             if(user.getPassword()==null){user.setPassword(oldUser.getPassword());}
-            if(user.getUserConnections()==null){user.setUserConnections(oldUser.getUserConnections());}
             if(user.getRoom()==null){user.setRoom(oldUser.getRoom());}
             if(user.getRole()==null){user.setRole(oldUser.getRole());}
 

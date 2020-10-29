@@ -1,25 +1,20 @@
 package com.j3s.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.j3s.model.compositeKey.UserConnectionKey;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user_to_connection")
 public class UserConnection {
-    @EmbeddedId
-    UserConnectionKey id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @MapsId("userID")
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="UserConnectionID")
+    private Long userConnectionID;
+
+    @ManyToOne
     @JoinColumn(name = "userID")
     private User user;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @MapsId("connectionID")
+    @ManyToOne
     @JoinColumn(name = "connectionID")
     private Connection connection;
 
@@ -35,12 +30,12 @@ public class UserConnection {
     public UserConnection() {
     }
 
-    public UserConnectionKey getId() {
-        return id;
+    public Long getUserConnectionID() {
+        return userConnectionID;
     }
 
-    public void setId(UserConnectionKey id) {
-        this.id = id;
+    public void setUserConnectionID(Long userConnectionID) {
+        this.userConnectionID = userConnectionID;
     }
 
     public User getUser() {
@@ -86,7 +81,7 @@ public class UserConnection {
     @Override
     public String toString() {
         return "UserConnection{" +
-                "id=" + id +
+                "userConnectionID=" + userConnectionID +
                 ", user=" + user +
                 ", connection=" + connection +
                 ", _default=" + _default +

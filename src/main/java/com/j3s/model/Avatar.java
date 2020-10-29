@@ -15,7 +15,6 @@ public class Avatar {
     @Column(name="pictureName")
     private String pictureName;
 
-
     public Avatar() {
     }
 
@@ -35,11 +34,4 @@ public class Avatar {
         this.pictureName = pictureName;
     }
 
-    @Override
-    public String toString() {
-        return "Avatar{" +
-                "avatarID=" + avatarID +
-                ", pictureName='" + pictureName + '\'' +
-                '}';
-    }
 }

@@ -9,7 +9,8 @@ import java.util.List;
 @Table(name = "user")
 public class User {
 
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="userID")
     private Long userID;
 
@@ -25,9 +26,6 @@ public class User {
 
     @Column(name= "Password")
     private String password;
-
-    @OneToMany(mappedBy = "user")
-    private List<UserConnection> userConnections;
 
     @JsonIgnore
     @ManyToOne
@@ -81,14 +79,6 @@ public class User {
         this.password = password;
     }
 
-    public List<UserConnection> getUserConnections() {
-        return userConnections;
-    }
-
-    public void setUserConnections(List<UserConnection> userConnections) {
-        this.userConnections = userConnections;
-    }
-
     public Room getRoom() {
         return room;
     }
@@ -105,17 +95,4 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userID=" + userID +
-                ", name='" + name + '\'' +
-                ", avatar=" + avatar +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", userConnections=" + userConnections +
-                ", room=" + room +
-                ", role=" + role +
-                '}';
-    }
 }
