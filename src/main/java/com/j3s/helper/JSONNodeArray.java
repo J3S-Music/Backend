@@ -5,7 +5,7 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO comment
 public class JSONNodeArray implements JSONNode{
     private final String name;
     private final int depth;

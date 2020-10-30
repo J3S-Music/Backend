@@ -21,7 +21,7 @@ public class SearchController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Playlist search(@RequestBody JSONObject search) throws IOException, ParseException {
+    public JSONObject search(@RequestBody JSONObject search) throws IOException, ParseException {
         System.out.println(search.getClass().getName());
         return SpotifyDsl.findSongList(search);
     }

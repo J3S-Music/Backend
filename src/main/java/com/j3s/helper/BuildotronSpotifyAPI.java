@@ -39,7 +39,7 @@ public class BuildotronSpotifyAPI {
      * @param userQ The userQ object from frontend
      * @return the search URI-String
      */
-    public String generateQ(JSONObject userQ){
+    public String generateQ(HashMap userQ){
         StringBuilder q = new StringBuilder(this.baseURI);
         q.append("/v1/search?");
         if(userQ.containsKey("q")){

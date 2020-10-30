@@ -24,7 +24,7 @@ public class SpotifyDsl {
         this.buildy = new BuildotronSpotifyAPI();
     }*/
 
-    public static Playlist findSongList(JSONObject userQ) throws IOException, ParseException {
+    public static JSONObject findSongList(JSONObject userQ) throws IOException, ParseException {
         String  uri = buildy.generateQ(userQ);
         String[] urlSplit = uri.split("\\?");
 
@@ -36,7 +36,7 @@ public class SpotifyDsl {
         skimmer = new GraphForSpotifySkimmer(responseJSON,"spotifyResponse");
         ArrayList<Song> songs = SongFactory.generateSongs(skimmer);
         Playlist res = new Playlist("roomIdWhyTheFuck",songs);
-        //return res.toPlaySON();
-        return res;
+        return res.toPlaySON();
+        //return res;
     }
 }

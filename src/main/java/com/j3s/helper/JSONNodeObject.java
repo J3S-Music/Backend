@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
+//TODO comment
 public class JSONNodeObject implements JSONNode {
     private final String name;
     private final int depth;
