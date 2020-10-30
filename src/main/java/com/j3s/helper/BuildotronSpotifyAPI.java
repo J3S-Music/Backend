@@ -5,6 +5,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
@@ -40,13 +43,14 @@ public class BuildotronSpotifyAPI {
         StringBuilder q = new StringBuilder(this.baseURI);
         q.append("/v1/search?");
         if(userQ.containsKey("q")){
-            JSONObject qJSON = (JSONObject) userQ.get("q");
+            System.out.println(userQ.getClass().getName());
+            HashMap qJSON = (HashMap) userQ.get("q");
             q.append(qFromObject(qJSON));
         }else{
             return null; //TODO errorhandling
         }
         q.append("&type=");
-        JSONArray typeArray = (JSONArray) userQ.get("type");
+        ArrayList typeArray = (ArrayList) userQ.get("type");
         for(Object o : typeArray){
             q.append((String) o);
             q.append(",");
@@ -60,7 +64,7 @@ public class BuildotronSpotifyAPI {
      * @param qJSON q Subobject from the userQ object from frontend
      * @return the q part of the URI
      */
-    public String qFromObject(JSONObject qJSON){
+    public String qFromObject(HashMap qJSON){
         StringBuilder q = new StringBuilder("q=");
         if(qJSON.containsKey("track")){
             q.append("track:");

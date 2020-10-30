@@ -15,17 +15,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SpotifyDsl {
-    private SpotifyLinkMock spotifyAuth;
-    private BuildotronSpotifyAPI buildy;
-    private GraphForSpotifySkimmer skimmer;
+    private static SpotifyLinkMock spotifyAuth = new SpotifyLinkMock("");
+    private static BuildotronSpotifyAPI buildy = new BuildotronSpotifyAPI();
+    private static GraphForSpotifySkimmer skimmer;
 
-    public SpotifyDsl(String clientAndSecret){
+    /*public SpotifyDsl(String clientAndSecret){
         this.spotifyAuth = new SpotifyLinkMock(clientAndSecret);
         this.buildy = new BuildotronSpotifyAPI();
-    }
+    }*/
 
-    public JSONObject findSongList(JSONObject userQ) throws IOException, ParseException {
-        String  uri = this.buildy.generateQ(userQ);
+    public static Playlist findSongList(JSONObject userQ) throws IOException, ParseException {
+        String  uri = buildy.generateQ(userQ);
         String[] urlSplit = uri.split("\\?");
 
         RequestSpecification songQ = APIHelper.getNewSongQ(new User(),urlSplit[0],spotifyAuth.getCurrentBearer());
@@ -36,6 +36,7 @@ public class SpotifyDsl {
         skimmer = new GraphForSpotifySkimmer(responseJSON,"spotifyResponse");
         ArrayList<Song> songs = SongFactory.generateSongs(skimmer);
         Playlist res = new Playlist("roomIdWhyTheFuck",songs);
-        return res.toPlaySON();
+        //return res.toPlaySON();
+        return res;
     }
 }
