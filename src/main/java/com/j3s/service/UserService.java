@@ -47,17 +47,13 @@ public class UserService {
         else{throw new ResourceNotFoundException("User not found: "+userID);}
     }
 
-
-
-
     public User getUserByEmail(String email){
         if(userRepo.findByEmail(email)==null){
             return null;
         }
         return userRepo.findByEmail(email);
     }
-
-
+    
     public User updateUser(Long userID, User user){
         if(userRepo.findById(userID).isPresent()){
             User oldUser = userRepo.findById(userID).get();

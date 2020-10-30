@@ -46,8 +46,8 @@ public class UserConnectionService {
         if (userConnectionOld!=null){
 
             if(userConnection.get_default()==null) {_default=userConnectionOld.get_default();}else{_default=userConnection.get_default();}
-            if(userConnection.get_default()==null) {key=userConnectionOld.getKey();}else{key=userConnection.getKey();}
-            if(userConnection.get_default()==null) {active=userConnectionOld.getActive();}else{active=userConnection.getActive();}
+            if(userConnection.getKey()==null) {key=userConnectionOld.getKey();}else{key=userConnection.getKey();}
+            if(userConnection.getActive()==null) {active=userConnectionOld.getActive();}else{active=userConnection.getActive();}
 
         }
         else{throw new ResourceNotFoundException("UserConnection not found");}
