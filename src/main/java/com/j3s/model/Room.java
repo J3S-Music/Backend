@@ -20,10 +20,10 @@ public class Room {
     private List<User> users;
 
     @Column(name="roomCode")
-    private String roomName;
+    private String roomCode;
 
     @Column(name="roomName")
-    private String roomCode;
+    private String roomName;
 
 
 

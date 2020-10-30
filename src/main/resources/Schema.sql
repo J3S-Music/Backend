@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `j3s`.`User` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `j3s`.`User_to_Connection` (
 `UserConnectionID` BIGINT NOT NULL AUTO_INCREMENT,
-`Key` VARCHAR(45) NULL,
+`Key` VARCHAR(45) NOT NULL,
 `Default` BOOLEAN NOT NULL,
 `Active` BOOLEAN NOT NULL DEFAULT FALSE,
 `UserID` BIGINT NOT NULL,
