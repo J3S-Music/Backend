@@ -25,9 +25,19 @@ public class Room {
     @Column(name="roomName")
     private String roomName;
 
-
+    @ManyToOne
+    @JoinColumn(name="connectionID", nullable=false)
+    private Connection connection;
 
     public Room() {
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
     public String getRoomName() {

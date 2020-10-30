@@ -47,13 +47,12 @@ public class  RoomController {
          return id;
     }
     @RequestMapping(
-            method = RequestMethod.POST,
-            path = "/room/join",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            method = RequestMethod.GET,
+            path = "/room/{id}/join",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void joinRoom(@RequestBody Room room, @RequestParam(name = "id") Long userID){
-        roomService.joinRoom(room.getRoomID(), userID, room.getRoomCode());
+    public void joinRoom(@PathVariable Long id, @RequestParam(name="roomCode") String roomCode, @RequestParam(name = "userID") Long userID){
+        roomService.joinRoom(id, userID, roomCode);
     }
 
 

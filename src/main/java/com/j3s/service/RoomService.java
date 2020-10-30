@@ -42,6 +42,9 @@ public class RoomService {
         if(roomRepo.findById(roomID).isPresent()){
             User u = userService.getUserByID(userID);
             Room r = roomRepo.findById(roomID).get();
+            System.out.println("ID übergeben: "+roomID);
+            System.out.println("Room get: "+r.getRoomID());
+            System.out.println(roomCode+","+r.getRoomCode());
             if(roomCode.equals(r.getRoomCode())) {
                 u.setRoom(r);
                 userService.updateUser(userID, u);
