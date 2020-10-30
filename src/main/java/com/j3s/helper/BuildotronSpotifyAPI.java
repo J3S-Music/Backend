@@ -56,6 +56,7 @@ public class BuildotronSpotifyAPI {
             q.append(",");
         }
         q.deleteCharAt(q.length()-1);
+        System.out.println(q);
         return q.toString();
     }
 

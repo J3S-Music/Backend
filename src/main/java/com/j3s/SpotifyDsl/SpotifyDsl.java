@@ -26,13 +26,14 @@ public class SpotifyDsl {
 
     public static JSONObject findSongList(JSONObject userQ) throws IOException, ParseException {
         String  uri = buildy.generateQ(userQ);
-        String[] urlSplit = uri.split("\\?");
 
-        RequestSpecification songQ = APIHelper.getNewSongQ(new User(),urlSplit[0],spotifyAuth.getCurrentBearer());
-        Response response = songQ.get("?"+urlSplit[1]);
+        RequestSpecification songQ = APIHelper.getNewSongQ(new User(),"",spotifyAuth.getCurrentBearer());
+
+        Response response = songQ.get(uri);
         ResponseBody body = response.getBody();
         JSONParser parser = new JSONParser();
         JSONObject responseJSON = (JSONObject) parser.parse(body.asString());
+        System.out.println(responseJSON);
         skimmer = new GraphForSpotifySkimmer(responseJSON,"spotifyResponse");
         ArrayList<Song> songs = SongFactory.generateSongs(skimmer);
         Playlist res = new Playlist("roomIdWhyTheFuck",songs);
