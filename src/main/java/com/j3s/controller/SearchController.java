@@ -3,6 +3,7 @@ package com.j3s.controller;
 import com.j3s.SpotifyDsl.SpotifyDsl;
 import com.j3s.model.UserConnection;
 import com.j3s.playlistHandler.Playlist;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.http.MediaType;
@@ -21,7 +22,7 @@ public class SearchController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public JSONObject search(@RequestBody JSONObject search) throws IOException, ParseException {
+    public JSONArray search(@RequestBody JSONObject search) throws IOException, ParseException {
         System.out.println(search.getClass().getName());
         return SpotifyDsl.findSongList(search);
     }

@@ -7,6 +7,8 @@ import com.j3s.model.User;
 import com.j3s.playlistHandler.Playlist;
 import com.j3s.repository.RoomRepo;
 import com.j3s.songFactory.Song;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,8 +76,8 @@ public class RoomService {
         else{throw new ResourceNotFoundException("Room not found: "+roomID);}
     }
 
-    public List<Song> getPlaylist(Long id) {
-        return playlistList.get(id).getPlaylist();
+    public JSONArray getPlaylist(Long id) {
+        return playlistList.get(id).toPlaySON();
     }
 
     public void addSongtoPlaylist(Song song, Long id) {

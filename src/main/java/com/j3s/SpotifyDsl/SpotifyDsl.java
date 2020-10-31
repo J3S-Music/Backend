@@ -7,6 +7,7 @@ import com.j3s.songFactory.SongFactory;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -24,7 +25,7 @@ public class SpotifyDsl {
         this.buildy = new BuildotronSpotifyAPI();
     }*/
 
-    public static JSONObject findSongList(JSONObject userQ) throws IOException, ParseException {
+    public static JSONArray findSongList(JSONObject userQ) throws IOException, ParseException {
         String  uri = buildy.generateQ(userQ);
 
         RequestSpecification songQ = APIHelper.getNewSongQ(new User(),"",spotifyAuth.getCurrentBearer());

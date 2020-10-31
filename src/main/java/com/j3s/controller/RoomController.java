@@ -3,6 +3,8 @@ package com.j3s.controller;
 import com.j3s.model.Room;
 import com.j3s.service.RoomService;
 import com.j3s.songFactory.Song;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +66,7 @@ public class  RoomController {
             path = "/room/{id}/playlist",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Song> getRoomPlaylist(@PathVariable Long id){
+    public JSONArray getRoomPlaylist(@PathVariable Long id){
         return roomService.getPlaylist(id);
     }
 

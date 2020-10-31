@@ -61,6 +61,7 @@ public class Playlist {
      * @return success boolean
      */
     public boolean add(Song song){
+        System.out.println(song.toJSong());
         for(Song existing : this.playlist){
             if(existing.getTrackUID().equals(song.getTrackUID())){
                 existing.upVote(true);
@@ -128,14 +129,12 @@ public class Playlist {
      * convert this to a representative JSON
      * @return said JSONObject
      */
-    public JSONObject toPlaySON(){
-        JSONObject play = new JSONObject();
+    public JSONArray toPlaySON(){
         JSONArray items = new JSONArray();
         for(Song song : playlist){
             items.add(song.toJSong());
         }
-        play.put("items",items);
-        return play;
+        return items;
     }
 
     /**
