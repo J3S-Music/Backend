@@ -1,5 +1,6 @@
 package com.j3s.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.j3s.playlistHandler.Playlist;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Room {
     @ManyToOne
     @JoinColumn(name="connectionID", nullable=false)
     private Connection connection;
+
 
     public Room() {
     }

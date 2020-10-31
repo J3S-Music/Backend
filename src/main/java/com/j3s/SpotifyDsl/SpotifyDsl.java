@@ -36,7 +36,7 @@ public class SpotifyDsl {
         System.out.println(responseJSON);
         skimmer = new GraphForSpotifySkimmer(responseJSON,"spotifyResponse");
         ArrayList<Song> songs = SongFactory.generateSongs(skimmer);
-        Playlist res = new Playlist("roomIdWhyTheFuck",songs);
+        Playlist res = new Playlist(0L,songs);
         return res.toPlaySON();
         //return res;
     }

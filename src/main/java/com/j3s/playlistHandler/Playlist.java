@@ -17,11 +17,18 @@ public class Playlist {
      */
     private List<Song> playlist;
 
+    public List<Song> getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(List<Song> playlist) {
+        this.playlist = playlist;
+    }
     //TODO Change to Room later?
     /**
      *Used for linking to room
      */
-    private String roomId;
+    private Long roomId;
 
     //scales used for song vote evaluation
     private final int upScale = 51;
@@ -31,7 +38,7 @@ public class Playlist {
      * constructor used for playlist of a room
      * @param roomId room[Id] of the room having this playlist
      */
-    public Playlist(String roomId){
+    public Playlist(Long roomId){
         this.roomId = roomId;
         this.playlist = new ArrayList<>();
     }
@@ -41,7 +48,7 @@ public class Playlist {
      * @param roomId TODO remove
      * @param startList list from search results
      */
-    public Playlist(String roomId, List<Song> startList){
+    public Playlist(Long roomId, List<Song> startList){
         this(roomId);
         this.addAll(startList);
     }

@@ -2,9 +2,11 @@ package com.j3s.controller;
 
 import com.j3s.model.Room;
 import com.j3s.service.RoomService;
+import com.j3s.songFactory.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -14,6 +16,8 @@ public class  RoomController {
 
     @Autowired
     RoomService roomService;
+
+
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -53,6 +57,32 @@ public class  RoomController {
     )
     public void joinRoom(@PathVariable Long id, @RequestParam(name="roomCode") String roomCode, @RequestParam(name = "userID") Long userID){
         roomService.joinRoom(id, userID, roomCode);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/room/{id}/playlist",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public List<Song> getRoomPlaylist(@PathVariable Long id){
+        return roomService.getPlaylist(id);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "/room/{id}/playlist",
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void addSongtoPlaylist(@RequestBody Song song, @PathVariable Long id){
+        roomService.addSongtoPlaylist(song, id);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            path = "/room/{id}/playlist/{songID}"
+    )
+    public void deleteSongFromPlaylist(@PathVariable String songID, @PathVariable Long id){
+        roomService.deleteSongFromPlaylist(songID, id);
     }
 
 

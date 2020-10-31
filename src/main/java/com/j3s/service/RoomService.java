@@ -4,11 +4,15 @@ import com.j3s.exception.AuthenticationFailedException;
 import com.j3s.exception.ResourceNotFoundException;
 import com.j3s.model.Room;
 import com.j3s.model.User;
+import com.j3s.playlistHandler.Playlist;
 import com.j3s.repository.RoomRepo;
+import com.j3s.songFactory.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -18,6 +22,18 @@ public class RoomService {
 
     @Autowired
     private UserService userService;
+
+    private HashMap<Long, Playlist> playlistList = new HashMap<>();
+
+    @PostConstruct
+    public void init(){
+        for (Room room: this.getAllRooms()) {
+            if(playlistList.get(room.getRoomID())==null){
+                Playlist playlist = new Playlist(room.getRoomID());
+                playlistList.put(room.getRoomID(), playlist);
+            }
+        }
+    }
 
     public List<Room> getAllRooms(){
         List<Room> roomList = new ArrayList<Room>();
@@ -35,7 +51,10 @@ public class RoomService {
 
 
     public Long createRoom(Room room) {
-        return roomRepo.save(room).getRoomID();
+        Long roomID = roomRepo.save(room).getRoomID();
+        Playlist playlist = new Playlist(roomID);
+        playlistList.put(roomID, playlist);
+        return roomID;
     }
 
     public void joinRoom(Long roomID, Long userID, String roomCode){
@@ -55,4 +74,17 @@ public class RoomService {
         else{throw new ResourceNotFoundException("Room not found: "+roomID);}
     }
 
+    public List<Song> getPlaylist(Long id) {
+        return playlistList.get(id).getPlaylist();
+    }
+
+    public void addSongtoPlaylist(Song song, Long id) {
+        playlistList.get(id).add(song);
+    }
+
+    public void deleteSongFromPlaylist(String songID, Long id) {
+        Playlist play = playlistList.get(id);
+        Song song= play.findSong(songID);
+        play.remove(song);
+    }
 }
