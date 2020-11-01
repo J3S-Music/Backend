@@ -29,7 +29,7 @@ public class User {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="roomID", nullable=false)
+    @JoinColumn(name="roomID", nullable=true)
     private Room room;
 
     @ManyToOne

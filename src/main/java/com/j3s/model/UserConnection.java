@@ -13,7 +13,6 @@ public class UserConnection {
     @ManyToOne
     @JoinColumn(name = "userID")
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "connectionID")
     private Connection connection;

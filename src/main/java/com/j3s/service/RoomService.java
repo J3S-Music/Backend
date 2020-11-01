@@ -89,4 +89,16 @@ public class RoomService {
         Song song= play.findSong(songID);
         play.remove(song);
     }
+
+    public void upvoteSong(String songID, Long id) {
+        Playlist play = playlistList.get(id);
+        Song song= play.findSong(songID);
+        song.upVote(true);
+    }
+
+    public void downvoteSong(String songID, Long id) {
+        Playlist play = playlistList.get(id);
+        Song song= play.findSong(songID);
+        song.downVote(true);
+    }
 }

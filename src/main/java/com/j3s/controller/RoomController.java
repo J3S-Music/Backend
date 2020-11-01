@@ -86,6 +86,20 @@ public class  RoomController {
     public void deleteSongFromPlaylist(@PathVariable String songID, @PathVariable Long id){
         roomService.deleteSongFromPlaylist(songID, id);
     }
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/room/{id}/playlist/{songID}/upvote"
+    )
+    public void upVoteSong(@PathVariable String songID, @PathVariable Long id){
+        roomService.upvoteSong(songID, id);
+    }
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/room/{id}/playlist/{songID}/downvote"
+    )
+    public void downVoteSong(@PathVariable String songID, @PathVariable Long id){
+        roomService.downvoteSong(songID, id);
+    }
 
 
 
