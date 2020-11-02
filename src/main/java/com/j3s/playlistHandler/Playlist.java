@@ -101,7 +101,7 @@ public class Playlist {
      */
     public int evaluateSong(Song song){
         if(song==null){
-            return 0;
+            return -1;
         }
         int score = 0;
         score+=song.getUpVotes()*this.upScale;
