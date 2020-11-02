@@ -101,4 +101,15 @@ public class RoomService {
         Song song= play.findSong(songID);
         song.downVote(true);
     }
+
+    public JSONObject getNext(Long id) {
+        Playlist play = playlistList.get(id);
+        Song s =play.getNextSong();
+        if(s!=null) {
+            return s.toJSong();
+        }
+        else {
+            throw new ResourceNotFoundException("Song not found");
+        }
+    }
 }

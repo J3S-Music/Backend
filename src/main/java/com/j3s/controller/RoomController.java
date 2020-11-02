@@ -101,6 +101,14 @@ public class  RoomController {
         roomService.downvoteSong(songID, id);
     }
 
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/room/{id}/playlist/getNext"
+    )
+    public JSONObject getNextSong(@PathVariable Long id){
+        return roomService.getNext(id);
+    }
+
 
 
 }
