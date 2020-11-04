@@ -65,12 +65,6 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-
-
-
-
-
-
     @RequestMapping(
             method = RequestMethod.POST,
             path = "/login",

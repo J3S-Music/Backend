@@ -31,11 +31,11 @@ public class UserConnectionController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            path = "/users/{id}/connections",
+            path = "/users/{UserID}/connections",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<UserConnection> getConnections(@PathVariable Long id){
-        return userConnectionService.getUserConnections(id);
+    public List<UserConnection> getConnections(@PathVariable Long UserID){
+        return userConnectionService.getUserConnections(UserID);
     }
 
     @RequestMapping(
