@@ -25,12 +25,12 @@ public class SpotifyDsl {
         this.buildy = new BuildotronSpotifyAPI();
     }*/
 
-    public static JSONArray findSongList(JSONObject userQ) throws IOException, ParseException {
-        String  uri = buildy.generateQ(userQ);
+    public static JSONArray findSongList(String userQ) throws IOException, ParseException {
+        //String  uri = buildy.generateQ(userQ);
 
-        RequestSpecification songQ = APIHelper.getNewSongQ(new User(),"",spotifyAuth.getCurrentBearer());
+        RequestSpecification songQ = APIHelper.getNewSongQ(new User(),"https://api.spotify.com/v1/",spotifyAuth.getCurrentBearer());
 
-        Response response = songQ.get(uri);
+        Response response = songQ.get("search?q="+userQ+"&type=track");
         ResponseBody body = response.getBody();
         JSONParser parser = new JSONParser();
         JSONObject responseJSON = (JSONObject) parser.parse(body.asString());

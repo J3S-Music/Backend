@@ -33,6 +33,6 @@ public class DummyMain {
         System.out.println(spotifyLinkMock.getCurrentBearer());
 
         System.out.println(spotifyLinkMock.getCurrentBearer());*/
-        System.out.println(SpotifyDsl.findSongList(content));
+        //System.out.println(SpotifyDsl.findSongList(content));
     }
 }

@@ -17,13 +17,11 @@ import java.util.List;
 public class SearchController {
 
     @RequestMapping(
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             path = "/search",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public JSONArray search(@RequestBody JSONObject search) throws IOException, ParseException {
-        System.out.println(search.getClass().getName());
-        return SpotifyDsl.findSongList(search);
+    public JSONArray search(@RequestParam String q) throws IOException, ParseException {
+        return SpotifyDsl.findSongList(q);
     }
 }
